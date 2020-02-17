@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: "service-gateway"
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  zipkin:
+    rabbitmq:
+      queue: zipkin
+  sleuth:
+    sampler:
+      percentage: 1.0
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://yjmyzz:123456@server2:8200/eureka
+
+security:
+  basic:
+    enabled: false
+
+management:
+  security:
+    enabled: false
+
+server:
+  port: 8040
+  context-path: "/api-order"
+
+logging:
+  level:
+   root: INFO
+   org.springframework.cloud.sleuth: DEBUG
+
+zuul:
+  routes:
+    api-a:
+      path: /api-user/**
+      service-id: service-provider
+      sensitive-headers:
+    api-b:
+      path: /api-order/**
+      service-id: service-consumer
+

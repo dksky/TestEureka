@@ -1,0 +1,10 @@
+rootProject.name = 'spring-cloud-demo'
+include 'register-center'
+include 'service-api'
+include 'service-provider'
+include 'service-consumer'
+include 'hystrix-dashboard'
+include 'config-server'
+include 'service-gateway'
+include 'zipkin-server'
+

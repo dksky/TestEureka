@@ -1,0 +1,44 @@
+buildscript {
+    repositories {
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.4.RELEASE")
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Edgware.RELEASE"
+    }
+}
+
+dependencies {
+    compile(project(":service-api"))
+    compile 'org.springframework.cloud:spring-cloud-starter-eureka'
+    compile 'org.springframework.cloud:spring-cloud-starter-zuul'
+    //compile 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    compile 'org.springframework.cloud:spring-cloud-starter-zipkin'
+	compile 'org.springframework.amqp:spring-rabbit'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'io.jmnarloch:ribbon-discovery-filter-spring-cloud-starter:2.1.0'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java' // 指定源码目录
+        }
+        resources {
+            srcDir 'src/main/resources' //资源目录
+        }
+    }
+}

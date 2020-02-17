@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: "service-provider"
+  profiles:
+    active: gated
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+#  zipkin:
+#    rabbitmq:
+#      queue: zipkin
+  sleuth:
+    sampler:
+      percentage: 1.0
+#  cloud:
+#    stream:
+#      default-binder: kafka
+#      kafka:
+#        binder:
+#          brokers: localhost
+#          zkNodes: localhost
+#          defaultZkPort: 2181
+#          defaultBrokerPort: 9092
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://yjmyzz:123456@server1:8100/eureka
+
+security:
+  basic:
+    enabled: true
+  user:
+    name: app01
+    password: passwd01
+
+management:
+  security:
+    enabled: false
+
+logging:
+  level:
+   root: INFO
+   org.springframework.cloud.sleuth: DEBUG
